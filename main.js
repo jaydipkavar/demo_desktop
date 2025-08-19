@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require("electron");
+const { autoUpdater } = require("electron-updater");
 const windowStateKeeper = require("electron-window-state");
 let win;
 function createWindow() {
@@ -22,4 +23,22 @@ function createWindow() {
   win.loadFile("index.html");
   mainWindowsState.manage(win);
 }
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  createWindow();
+  autoUpdater.checkForUpdatesAndNotify();
+});
+
+autoUpdater.on('update-available', () => {
+  console.log('Update available.');
+});
+
+autoUpdater.on('update-downloaded', () => {
+  console.log('Update downloaded; will install in 5 seconds...');
+  setTimeout(() => {
+    autoUpdater.quitAndInstall();
+  }, 5000);
+});
+
+autoUpdater.on('error', (err) => {
+  console.error('Error in auto-updater:', err);
+});
