@@ -1,12 +1,15 @@
 {
   "name": "electron_js",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "My Electron app with auto-update",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "dev": "nodemon --exec electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "electron-builder",
+    "release": "electron-builder --publish always",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "electron-builder"
   },
   "keywords": [],
   "author": "",
@@ -20,10 +23,11 @@
     }
   },
   "dependencies": {
-    "electron": "^28.2.0",
     "electron-updater": "^6.1.7"
   },
   "devDependencies": {
-    "electron-builder": "^26.0.12"
+    "electron": "^26.0.0",
+    "electron-builder": "^26.0.12",
+    "electron-updater": "^5.3.0"
   }
 }
